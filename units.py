@@ -63,6 +63,13 @@ class UnitDied(Exception):
 
 class Ghost(Unit):
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self):
+        super().__init__(max_hp=10, default_hp=8, default_defence=2)
         self.name = "Ghost"
+
+
+class Skeleton(Unit):
+
+    def __init__(self):
+        super().__init__(max_hp=8, default_hp=6, default_defence=4)
+        self.name = "Skeleton"

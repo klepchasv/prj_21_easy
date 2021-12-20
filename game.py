@@ -1,4 +1,4 @@
-from units import Ghost
+from units import Ghost, Skeleton
 from field import Field
 from terrain import Cell, Wall, Grass, Trap, Door, Key
 from mapping_simp import mapping as mp
@@ -34,7 +34,7 @@ class GameController:
                 row.append(Cell(Door()))
             elif symb == "K":
                 row.append(Cell(Key()))
-            elif symb == "G":
+            elif symb == "G" or symb == "S":
                 row.append(Cell(Grass()))
                 self.hero.set_coordinates(hero_coord)
             elif symb == "\n":
@@ -56,7 +56,19 @@ class GameController:
             print()
 
     def play(self):
-        self.hero = Ghost(max_hp=10, default_hp=8, default_defence=2)
+
+        while True:
+
+            player_choice = input("Choose your hero, Ghost or Skeleton (G/S): ")
+            if player_choice.upper() == "G":
+                self.hero = Ghost()
+                break
+            elif player_choice.upper() == "S":
+                self.hero = Skeleton()
+                break
+
+        print(f"You've chosen {self.hero.name}! Good luck!")
+
         self.make_field(map_data)
 
         while self.game_on and not self.hero.has_escaped():
